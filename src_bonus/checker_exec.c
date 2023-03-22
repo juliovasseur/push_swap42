@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_exec.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:30:18 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/04 17:31:56 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:25:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ void	exec_instru_3_letters(t_pile **stack_a, t_pile **stack_b, char *str)
 	else if (ft_strcmp(str, "ss\n") == 1)
 		swap_ss(stack_a, stack_a, 11);
 	else if (ft_strcmp(str, "pa\n") == 1)
-		push(stack_a, stack_b, 11);
+		push(stack_b, stack_a, 11);
 	else if (ft_strcmp(str, "pb\n") == 1)
-		push(stack_a, stack_a, 11);
+		push(stack_a, stack_b, 11);
 	else if (ft_strcmp(str, "ra\n") == 1)
 		rotate(stack_a, 11);
 	else if (ft_strcmp(str, "rb\n") == 1)

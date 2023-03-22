@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_checker.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:16:13 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/04 17:32:37 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:29:42 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,20 @@ int	checker_error_and_free(t_data *data, char **argv)
 {
 	if (create_tab_arg(data) == 0)
 	{
-		write (1, "KO\n", 3);
-		free_splitdata(&data->tab);
+		write (2, "KO\n", 3);
 		free(data);
 		return (2);
 	}
 	else if (verif_all(data) == 0 || verif_vide(argv) == 0)
 	{
-		write (1, "KO\n", 3);
+		write (2, "KO\n", 3);
 		free_splitdata(&data->tab);
 		free(data);
 		return (2);
 	}
 	else if (order_or_not(data) == 0)
 	{
-		write (1, "OK\n", 3);
-		free_splitdata(&data->tab);
+		write (2, "OK\n", 3);
 		free(data);
 		return (2);
 	}

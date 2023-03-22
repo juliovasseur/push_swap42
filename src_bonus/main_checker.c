@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:15:52 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/04 17:30:42 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/22 14:33:07 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,24 @@ int	ft_strcmp(char *s1, char *s2)
 }
 
 
-int	final_verif_and_free(t_pile *stack_a, t_data *data)
+int	verif_if_stack_empty(t_pile *stack)
 {
+	if (stack != NULL)
+		return (0);
+	return (1);
+}
+
+int	final_verif_and_free(t_pile *stack_a, t_pile *stack_b, t_data *data)
+{
+	if (verif_if_stack_empty(stack_b) == 0)
+	{
+		write (1, "KO\n", 3);
+		free_splitdata(&data->tab);
+		free(data);
+		freelst(&stack_b);
+		freelst(&stack_a);
+		return (0);
+	}
 	if (verif_stack_order(&stack_a) == 0)
 	{
 		write (1, "KO\n", 3);
@@ -63,7 +79,6 @@ int	get_instru(t_pile **stack_a, t_pile **stack_b)
 	return (1);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -73,10 +88,12 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (2);
 	data = malloc(sizeof(t_data));
+	if (!data)
+		return (2);
 	data->argc = argc;
 	data->argment = argv;
 	if (checker_error_and_free(data, argv) == 2)
-		return (2);
+		return (0);
 	stack_b = NULL;
 	tokenize(data, &stack_a);
 	if (get_instru(&stack_a, &stack_b) == 0)
@@ -86,7 +103,7 @@ int	main(int argc, char **argv)
 		freelst(&stack_a);
 		return (2);
 	}
-	else if (final_verif_and_free(stack_a, data) == 0)
+	else if (final_verif_and_free(stack_a, stack_b, data) == 0)
 		return (2);
 	free_splitdata(&data->tab);
 	free(data);
