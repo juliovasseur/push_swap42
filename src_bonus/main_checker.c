@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_checker.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:15:52 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/22 14:33:07 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/23 13:58:34 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (1);
 }
-
 
 int	verif_if_stack_empty(t_pile *stack)
 {
@@ -58,7 +57,7 @@ int	final_verif_and_free(t_pile *stack_a, t_pile *stack_b, t_data *data)
 	return (1);
 }
 
-int	get_instru(t_pile **stack_a, t_pile **stack_b)
+int	get_instru(t_pile **stack_a, t_pile **stack_b, t_data *data)
 {
 	char	*str;
 
@@ -68,6 +67,9 @@ int	get_instru(t_pile **stack_a, t_pile **stack_b)
 		if (verif_instru(str) == 0)
 		{
 			free(str);
+			free_splitdata(&data->tab);
+			free(data);
+			freelst(stack_a);
 			write (2, "KO\n", 3);
 			return (0);
 		}
@@ -96,13 +98,8 @@ int	main(int argc, char **argv)
 		return (0);
 	stack_b = NULL;
 	tokenize(data, &stack_a);
-	if (get_instru(&stack_a, &stack_b) == 0)
-	{
-		free_splitdata(&data->tab);
-		free(data);
-		freelst(&stack_a);
+	if (get_instru(&stack_a, &stack_b, data) == 0)
 		return (2);
-	}
 	else if (final_verif_and_free(stack_a, stack_b, data) == 0)
 		return (2);
 	free_splitdata(&data->tab);
