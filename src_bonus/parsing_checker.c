@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 17:16:13 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/22 13:29:42 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/23 12:36:07 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	checker_error_and_free(t_data *data, char **argv)
 	else if (order_or_not(data) == 0)
 	{
 		write (2, "OK\n", 3);
+		free_splitdata(&data->tab);
 		free(data);
 		return (2);
 	}
