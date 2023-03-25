@@ -6,7 +6,7 @@
 /*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 16:56:22 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/03 16:39:00 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/25 14:06:20 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,26 +46,6 @@ void	sort_in_tree(t_pile **stacka)
 	}
 }
 
-void	norm_sorttab(t_pile **stacka, t_pile **stackb, t_data *data, int len)
-{
-	data->cpt = 0;
-	while (data->pivot <= len)
-	{
-		if (data->pivot != 0)
-			data->equalpivot += data->pivotmp;
-		data->pivot += data->pivotmp;
-		while (data->cpt < data->pivot)
-		{	
-			data->tmp2 = ft_stacksize(stacka);
-			data->tmp = pos_contentwo(stacka, data->equalpivot, data->pivot);
-			push_beginstack(stacka, stackb, data->tmp, data->tmp2);
-			if ((*stackb)->content <= (data->pivot - (data->pivotmp / 2)))
-				rotate(stackb, 6);
-			data->cpt++;
-		}
-	}
-}
-
 void	sort_in_four(t_pile **stacka, t_pile **stackb)
 {
 	int		i;
@@ -86,6 +66,26 @@ void	sort_in_four(t_pile **stacka, t_pile **stackb)
 		tmp = next;
 	}
 	sort_in_tree(stacka);
+}
+
+void	norm_sorttab(t_pile **stacka, t_pile **stackb, t_data *data, int len)
+{
+	data->cpt = 0;
+	while (data->pivot <= len)
+	{
+		if (data->pivot != 0)
+			data->equalpivot += data->pivotmp;
+		data->pivot += data->pivotmp;
+		while (data->cpt < data->pivot)
+		{	
+			data->tmp2 = ft_stacksize(stacka);
+			data->tmp = pos_contentwo(stacka, data->equalpivot, data->pivot);
+			push_beginstack(stacka, stackb, data->tmp, data->tmp2);
+			if ((*stackb)->content <= (data->pivot - (data->pivotmp / 2)))
+				rotate(stackb, 6);
+			data->cpt++;
+		}
+	}
 }
 
 int	pos_content(t_pile **a, int i)

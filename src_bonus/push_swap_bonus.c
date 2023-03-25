@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 15:42:50 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/25 15:51:36 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/25 16:19:16 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../include/push_swap_bonus.h"
 
 int	main(int argc, char **argv)
 {

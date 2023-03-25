@@ -1,30 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_checker.c                                     :+:      :+:    :+:   */
+/*   main_checker_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:15:52 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/23 13:58:34 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:15:30 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap_bonus.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] - s2[i] != 0)
-			return (0);
-		i++;
-	}
-	return (1);
-}
 
 int	verif_if_stack_empty(t_pile *stack)
 {
@@ -81,6 +67,30 @@ int	get_instru(t_pile **stack_a, t_pile **stack_b, t_data *data)
 	return (1);
 }
 
+int	create_stacka(t_pile **stacka, int *stacktoken, int len)
+{
+	int	i;
+
+	*stacka = lstnew(stacktoken[0]);
+	if (!stacka)
+	{
+		free(stacktoken);
+		return (0);
+	}
+	i = 1;
+	while (i != len)
+	{
+		lstadd_back(stacka, lstnew(stacktoken[i]));
+		if (!stacka)
+		{
+			free(stacktoken);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_data	*data;
@@ -88,10 +98,10 @@ int	main(int argc, char **argv)
 	t_pile	*stack_b;
 
 	if (argc < 2)
-		return (2);
+		return (0);
 	data = malloc(sizeof(t_data));
 	if (!data)
-		return (2);
+		return (0);
 	data->argc = argc;
 	data->argment = argv;
 	if (checker_error_and_free(data, argv) == 2)
@@ -99,9 +109,9 @@ int	main(int argc, char **argv)
 	stack_b = NULL;
 	tokenize(data, &stack_a);
 	if (get_instru(&stack_a, &stack_b, data) == 0)
-		return (2);
+		return (0);
 	else if (final_verif_and_free(stack_a, stack_b, data) == 0)
-		return (2);
+		return (0);
 	free_splitdata(&data->tab);
 	free(data);
 	freelst(&stack_a);

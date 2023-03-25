@@ -6,13 +6,13 @@
 /*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 15:19:12 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/04 18:00:25 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/25 17:10:04 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
 
-void	tokenize(t_data *data, t_pile **stacka)
+int	tokenize(t_data *data, t_pile **stacka)
 {
 	int	i;
 	int	j;
@@ -20,25 +20,25 @@ void	tokenize(t_data *data, t_pile **stacka)
 	int	*result;
 	int	len;
 
-	len = nbarg(data->tab);
-	result = malloc(len * sizeof(int));
 	i = 0;
-	tmp = len;
+	len = nbarg(data->tab);
+	if (malloc_int_tab(&result, len) == 0)
+		return (0);
 	while (i < len)
 	{
 		j = 0;
 		tmp = len - 1;
 		while (j < len)
 		{
-			if (ft_atoi(data->tab[i]) < ft_atoi(data->tab[j]))
+			if (ft_atoi(data->tab[i]) < ft_atoi(data->tab[j++]))
 				tmp--;
-			j++;
 		}
-		result[i] = tmp;
-		i++;
+		result[i++] = tmp;
 	}
-	create_stacka(stacka, result, len);
+	if (create_stacka(stacka, result, len) == 0)
+		return (0);
 	free(result);
+	return (1);
 }
 
 void	push_beginstack(t_pile **stacka, t_pile **stackb, int pos, int len)
@@ -95,7 +95,7 @@ void	sort_in_tab(t_pile **stacka, t_pile **stackb, t_data *data, int len)
 {
 	data->equalpivot = 0;
 	data->pivot = 0;
-	if (len == 500)
+	if (len > 100)
 		data->pivotmp = len / 10;
 	else
 		data->pivotmp = len / 5;

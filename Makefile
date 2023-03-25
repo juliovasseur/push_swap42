@@ -6,7 +6,7 @@
 #    By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/23 17:09:26 by jvasseur          #+#    #+#              #
-#    Updated: 2023/03/04 18:23:08 by jvasseur         ###   ########.fr        #
+#    Updated: 2023/03/25 17:16:20 by jvasseur         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ SRC = src/create_tab_arg.c src/parsing.c src/parsing_two.c src/instruction_two.c
 
 SRC_MAIN_PUSH = src/push_swap.c
 
-SRC_BONUS = src_bonus/checker_exec.c src_bonus/main_checker.c src_bonus/parsing_checker.c
+SRC_BONUS = src_bonus/checker_exec_bonus.c src_bonus/main_checker_bonus.c src_bonus/parsing_checker_bonus.c src_bonus/create_tab_arg_bonus.c src_bonus/parsing_bonus.c src_bonus/parsing_two_bonus.c src_bonus/instruction_two_bonus.c src_bonus/lst_utils_bonus.c src_bonus/instruction_bonus.c src_bonus/sort_in_tab_bonus.c src_bonus/utils_bonus.c 
 
 MAKE = make -C
 
@@ -36,7 +36,7 @@ $(NAME) : $(OBJ)
 
 bonus : ${OBJ} ${OBJ_BONUS}
 	$(MAKE) Libft
-	$(CC) $(CFLAGS) $(SRC) $(SRC_BONUS) -o $(NAME_BONUS) -LLibft -lft -LLibft/ft_printf -lftprintf
+	$(CC) $(CFLAGS) $(SRC_BONUS) -o $(NAME_BONUS) -LLibft -lft -LLibft/ft_printf -lftprintf
 	
 all : $(NAME)
 
