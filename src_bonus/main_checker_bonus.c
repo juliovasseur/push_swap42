@@ -6,7 +6,7 @@
 /*   By: jvasseur <jvasseur@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 18:15:52 by jvasseur          #+#    #+#             */
-/*   Updated: 2023/03/25 17:15:30 by jvasseur         ###   ########.fr       */
+/*   Updated: 2023/03/25 18:47:54 by jvasseur         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	get_instru(t_pile **stack_a, t_pile **stack_b, t_data *data)
 			free_splitdata(&data->tab);
 			free(data);
 			freelst(stack_a);
-			write (2, "KO\n", 3);
+			write (2, "Error\n", 6);
 			return (0);
 		}
 		exec_instru(stack_a, stack_b, str);
